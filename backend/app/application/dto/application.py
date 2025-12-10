@@ -1,6 +1,6 @@
 from datetime import date
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from typing_extensions import Literal
 
 from app.application.dto import BaseSchema
@@ -68,3 +68,10 @@ class ApplicationDTO(BaseSchema):
 
     last_step: ApplicationLastStep | None = None
     feedback: ApplicationFeedback | None = None
+
+    finalized: bool = False
+
+    @model_validator(mode='after')
+    def set_finalized(self) -> 'ApplicationDTO':
+        self.finalized = self.feedback is not None
+        return self
