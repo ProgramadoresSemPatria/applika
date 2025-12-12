@@ -15,7 +15,7 @@ class ListApplicationsUseCase:
         active, finalized = [], []
         for application in applications:
             application = ApplicationDTO.model_validate(application)
-            if applications.feedback is None:
+            if application.feedback is None:
                 active.append(application)
             else:
                 finalized.append(application)
