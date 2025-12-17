@@ -65,4 +65,5 @@ class Settings(BaseSettings):
             return None
         return "/openapi.json"
 
+
 envs = Settings()
